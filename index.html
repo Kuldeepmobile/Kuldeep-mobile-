@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuldeep Mobile | Bilara</title>
+  <meta name="description" content="Kuldeep Mobile, Sadar Bazaar Bilara - mobiles, accessories, screen repair, mobile back skins and more.">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Arial,sans-serif;background:#f5f7fb;color:#18202a;line-height:1.5}
+    header{background:linear-gradient(135deg,#111827,#2563eb);color:white;padding:18px 6%;position:sticky;top:0;z-index:10}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .logo{font-size:25px;font-weight:800}.logo span{color:#facc15}
+    nav a{color:white;text-decoration:none;margin-left:18px;font-weight:600}
+    .hero{padding:75px 6%;background:linear-gradient(135deg,#eff6ff,#ffffff);text-align:center}
+    .hero h1{font-size:clamp(36px,7vw,64px);margin-bottom:12px;color:#111827}
+    .hero h1 span{color:#2563eb}.hero p{font-size:19px;color:#4b5563;max-width:700px;margin:0 auto 25px}
+    .buttons{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:13px 22px;border-radius:10px;text-decoration:none;font-weight:700}
+    .primary{background:#2563eb;color:white}.whatsapp{background:#16a34a;color:white}
+    section{padding:55px 6%;max-width:1150px;margin:auto}
+    .title{text-align:center;margin-bottom:30px}.title h2{font-size:32px}.title p{color:#6b7280}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+    .card{background:white;padding:25px;border-radius:16px;box-shadow:0 5px 20px #0000000d;text-align:center}
+    .icon{font-size:40px;margin-bottom:10px}.card h3{margin-bottom:7px}
+    .products .card{text-align:left}.price{color:#2563eb;font-weight:800;margin-top:8px}
+    .contact{background:#111827;color:white;max-width:none}.contact-inner{max-width:1150px;margin:auto;text-align:center}
+    .contact p{margin:8px 0;color:#d1d5db}.contact a{color:white}
+    footer{text-align:center;background:#0b1120;color:#cbd5e1;padding:18px}
+    @media(max-width:650px){nav a{display:none}.hero{padding:55px 5%}section{padding:45px 5%}}
+  </style>
+</head>
+<body>
+<header>
+  <nav>
+    <div class="logo">Kuldeep <span>Mobile</span></div>
+    <div>
+      <a href="#services">Services</a>
+      <a href="#products">Products</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Welcome to <span>Kuldeep Mobile</span></h1>
+    <p>Bilara mein mobiles, accessories, mobile back skins, screen repair aur mobile services — sab ek hi jagah.</p>
+    <div class="buttons">
+      <a class="btn primary" href="#products">Products Dekhein</a>
+      <a class="btn whatsapp" href="https://wa.me/919950159562?text=Namaste%20Kuldeep%20Mobile%2C%20mujhe%20product%20ke%20baare%20mein%20jaankari%20chahiye." target="_blank">WhatsApp Karein</a>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="title">
+      <h2>Hamari Services</h2>
+      <p>Reliable service aur accessories</p>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="icon">📱</div><h3>New Mobiles</h3><p>Latest Android aur iPhone models.</p></div>
+      <div class="card"><div class="icon">🛠️</div><h3>Screen Repair</h3><p>Mobile display aur screen related service.</p></div>
+      <div class="card"><div class="icon">🎨</div><h3>Back Skins</h3><p>Mobile ke liye stylish back skins.</p></div>
+      <div class="card"><div class="icon">🛡️</div><h3>Glass & Accessories</h3><p>Screen guards, covers aur accessories.</p></div>
+    </div>
+  </section>
+
+  <section id="products" class="products">
+    <div class="title">
+      <h2>Popular Products</h2>
+      <p>Price aur availability ke liye WhatsApp par poochhein</p>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="icon">📱</div><h3>Smartphones</h3><p>Latest Android & iPhone</p><div class="price">WhatsApp for Price</div></div>
+      <div class="card"><div class="icon">🎨</div><h3>Mobile Back Skin</h3><p>Different designs & models</p><div class="price">WhatsApp for Price</div></div>
+      <div class="card"><div class="icon">🛡️</div><h3>Screen Guard</h3><p>Different mobile models</p><div class="price">WhatsApp for Price</div></div>
+      <div class="card"><div class="icon">🔌</div><h3>Mobile Accessories</h3><p>Cables, chargers, covers & more</p><div class="price">WhatsApp for Price</div></div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="contact-inner">
+      <div class="title">
+        <h2>Contact Kuldeep Mobile</h2>
+        <p>Order ya enquiry ke liye contact karein</p>
+      </div>
+      <p>📍 Sadar Bazaar, Bilara, Rajasthan</p>
+      <p>📞 <a href="tel:+919950159562">9950159562</a> &nbsp; | &nbsp; <a href="tel:+918890880746">8890880746</a></p>
+      <div class="buttons" style="margin-top:18px">
+        <a class="btn whatsapp" href="https://wa.me/919950159562" target="_blank">WhatsApp</a>
+        <a class="btn primary" href="tel:+919950159562">Call Now</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 Kuldeep Mobile, Bilara. All Rights Reserved.</footer>
+</body>
+</html>
