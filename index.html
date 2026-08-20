@@ -1,98 +1,44 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kuldeep Mobile | Mobile Back Skin Catalogue</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kuldeep Mobile | Bilara</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#111827}
-header{background:#07111f;color:#fff;padding:16px 5%;position:sticky;top:0;z-index:10}.nav{max-width:1150px;margin:auto;display:flex;justify-content:space-between;align-items:center}.logo{font-size:25px;font-weight:900}.logo span{color:#ffd21a}
-.hero{background:linear-gradient(135deg,#07111f,#2563eb);color:#fff;text-align:center;padding:50px 5%}.hero h1{font-size:clamp(35px,7vw,60px);margin:0 0 10px}.hero p{font-size:18px;color:#dbeafe}
-.wrap{max-width:1150px;margin:auto;padding:40px 5%}.title{text-align:center;margin-bottom:25px}.title h2{font-size:32px;margin:0}.title p{color:#6b7280}
-.brands{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}.brand{background:#fff;border:2px solid #e5e7eb;border-radius:14px;padding:18px;text-align:center;font-weight:900;cursor:pointer}.brand:hover,.brand.active{border-color:#2563eb;background:#eff6ff;color:#2563eb}
-.search{width:100%;padding:15px;border:1px solid #d1d5db;border-radius:12px;font-size:16px;margin:20px 0}
-.models{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}.model{background:#fff;border-radius:12px;padding:15px;border:1px solid #e5e7eb;cursor:pointer}.model:hover{border-color:#2563eb}
-.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}.product{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 5px 20px #0001}.product .pic{height:190px;background:linear-gradient(135deg,#dbeafe,#eef2ff);display:flex;align-items:center;justify-content:center;font-size:75px}.info{padding:17px}.info h3{margin:0 0 5px}.price{color:#2563eb;font-weight:900;margin:8px 0}.btn{display:inline-block;background:#16a34a;color:#fff;padding:10px 14px;border-radius:9px;text-decoration:none;font-weight:800}
-.note{background:#fff7ed;border:1px dashed #fb923c;border-radius:12px;padding:15px;margin-top:20px;text-align:center}
-footer{background:#07111f;color:#cbd5e1;text-align:center;padding:22px}.float{position:fixed;right:16px;bottom:16px;background:#16a34a;color:#fff;padding:14px 18px;border-radius:50px;text-decoration:none;font-weight:900}
-</style>
-</head>
+header{background:#07111f;color:#fff;position:sticky;top:0;z-index:9}.nav{max-width:1200px;margin:auto;padding:15px 5%;display:flex;justify-content:space-between;align-items:center}.logo{font-size:27px;font-weight:900}.logo span{color:#ffd21a}
+nav a{color:#fff;text-decoration:none;margin:0 9px;font-weight:700}.hero{background:#07111f;color:#fff}.hero img{width:100%;display:block;max-height:620px;object-fit:cover}
+.wrap{max-width:1200px;margin:auto;padding:45px 5%}.title{text-align:center;margin-bottom:28px}.title h2{font-size:34px;margin:0}.title p{color:#6b7280}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px}.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 24px #0001;border:1px solid #eee}.card img{width:100%;height:180px;object-fit:cover}.card .info{padding:16px}.card h3{margin:0 0 6px}.price{font-weight:900;color:#2563eb;margin:8px 0}.btn{display:inline-block;padding:10px 14px;border-radius:9px;text-decoration:none;font-weight:800;background:#16a34a;color:white}
+.features{background:#07111f;color:#fff}.featuregrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;text-align:center}.feature{padding:20px}.feature b{display:block;font-size:18px;margin:7px}.contact{text-align:center;background:#fff}.contact a{color:#2563eb}.float{position:fixed;right:16px;bottom:16px;background:#16a34a;color:#fff;padding:14px 20px;border-radius:50px;text-decoration:none;font-weight:900;z-index:20}
+footer{background:#050b14;color:#cbd5e1;text-align:center;padding:20px}
+@media(max-width:650px){nav{display:none}.nav{justify-content:center}.hero img{max-height:430px}}
+</style></head>
 <body>
-<header><div class="nav"><div class="logo">KULDEEP <span>MOBILE</span></div><div>📍 Bilara</div></div></header>
+<header><div class="nav"><div class="logo">KULDEEP <span>MOBILE</span></div><nav><a href="#products">Products</a><a href="#skins">Back Skin</a><a href="#contact">Contact</a></nav></div></header>
+<section class="hero"><img src="website-banner.png" alt="Kuldeep Mobile products and back skin"></section>
 
-<section class="hero">
-<h1>📱 Mobile Back Skin Catalogue</h1>
-<p>Apne mobile ka brand aur model select karein — skin ka option dekhein aur WhatsApp par order karein.</p>
+<section class="wrap" id="products"><div class="title"><h2>Our Products</h2><p>Price aur availability ke liye WhatsApp par order karein</p></div>
+<div class="grid">
+<div class="card"><img src="website-banner.png" alt="Mobile Back Skin"><div class="info"><h3>Mobile Back Skin</h3><p>Different models & designs</p><div class="price">₹199 se</div><a class="btn" href="https://wa.me/919950159562?text=Mobile%20back%20skin%20chahiye" target="_blank">WhatsApp Order</a></div></div>
+<div class="card"><img src="website-banner.png" alt="Tempered Glass"><div class="info"><h3>Tempered Glass</h3><p>Different mobile models</p><div class="price">₹99 se</div><a class="btn" href="https://wa.me/919950159562?text=Tempered%20glass%20chahiye" target="_blank">WhatsApp Order</a></div></div>
+<div class="card"><img src="website-banner.png" alt="Charger"><div class="info"><h3>Charger</h3><p>Fast charging accessories</p><div class="price">₹249 se</div><a class="btn" href="https://wa.me/919950159562?text=Charger%20chahiye" target="_blank">WhatsApp Order</a></div></div>
+<div class="card"><img src="website-banner.png" alt="Data Cable"><div class="info"><h3>Data Cable</h3><p>Charging & data cables</p><div class="price">₹129 se</div><a class="btn" href="https://wa.me/919950159562?text=Data%20cable%20chahiye" target="_blank">WhatsApp Order</a></div></div>
+</div></section>
+
+<section class="wrap" id="skins"><div class="title"><h2>📱 Mobile Back Skin Collection</h2><p>Apne mobile model ka naam WhatsApp par bhejein</p></div>
+<div class="grid">
+<div class="card"><img src="website-banner.png" alt="Back Skin Collection"><div class="info"><h3>Premium Back Skin</h3><div class="price">₹199 se</div><a class="btn" href="https://wa.me/919950159562?text=Back%20skin%20collection%20dikhaiye" target="_blank">Collection Dekhein</a></div></div>
+<div class="card"><img src="website-banner.png" alt="Designer Back Skin"><div class="info"><h3>Designer Skin</h3><div class="price">₹199 se</div><a class="btn" href="https://wa.me/919950159562?text=Designer%20skin%20chahiye" target="_blank">WhatsApp Order</a></div></div>
+</div></section>
+
+<section class="features"><div class="wrap"><div class="featuregrid">
+<div class="feature">🚚<b>Fast Service</b>Quick & reliable</div><div class="feature">⭐<b>Best Quality</b>Trusted products</div><div class="feature">🛡️<b>Secure Payment</b>Easy payment</div><div class="feature">💬<b>Customer Support</b>WhatsApp support</div>
+</div></div></section>
+
+<section class="contact wrap" id="contact"><div class="title"><h2>Contact Kuldeep Mobile</h2><p>📍 Sadar Bazaar, Bilara, Rajasthan</p></div>
+<p>📞 <a href="tel:+919950159562">9950159562</a> &nbsp; | &nbsp; <a href="tel:+918890880746">8890880746</a></p>
+<a class="btn" href="https://wa.me/919950159562" target="_blank">💬 WhatsApp</a>
 </section>
-
-<section class="wrap">
-<div class="title"><h2>1. Brand Select Karein</h2><p>Brand par click karein</p></div>
-<div class="brands" id="brands"></div>
-
-<input class="search" id="search" placeholder="🔍 Mobile model search karein...">
-
-<div class="title" style="margin-top:30px"><h2 id="modelTitle">2. Mobile Model</h2><p id="modelHint">Pehle brand select karein</p></div>
-<div class="models" id="models"></div>
-
-<div class="title" style="margin-top:45px"><h2>3. Back Skin</h2><p>Selected model ke liye available option</p></div>
-<div class="products" id="products"></div>
-<div class="note">Model list mein aapke required model ka naam na mile to WhatsApp par model ka naam/photo bhej dein.</div>
-</section>
-
-<footer>© 2026 Kuldeep Mobile, Sadar Bazaar Bilara<br>📞 9950159562 | 8890880746</footer>
+<footer>© 2026 Kuldeep Mobile, Bilara • All Rights Reserved</footer>
 <a class="float" href="https://wa.me/919950159562" target="_blank">💬 WhatsApp</a>
-
-<script>
-const data={
-"Samsung":["Galaxy S25 Ultta","Galaxy S24 Ultra","Galaxy S24+","Galaxy S24","Galaxy S23 Ultra","Galaxy S23+","Galaxy S23","Galaxy A55","Galaxy A35","Galaxy A25","Galaxy A15"],
-"iPhone":["iPhone 15 Pro Max","iPhone 15 Pro","iPhone 15","iPhone 14 Pro Max","iPhone 14 Pro","iPhone 14","iPhone 13","iPhone 12","iPhone 11"],
-"Redmi":["Note 13 Pro+","Note 13 Pro","Note 13","Note 12 Pro+","Note 12 Pro","Note 12","12 5G","13C","A3"],
-"Realme":["12 Pro+ 5G","12 Pro 5G","12 5G","11 Pro+ 5G","11 Pro 5G","11x 5G","C55","C53"],
-"Vivo":["V30 Pro","V30","V29 Pro","V29","V27 Pro","V27","Y200","Y100","Y28","Y22"],
-"Oppo":["Reno 11 Pro","Reno 11","Reno 10 Pro+","Reno 10 Pro","A79 5G","A78 5G","A58","A38"],
-"OnePlus":["12","12R","11","11R","Nord 4","Nord CE 4","Nord CE 3 Lite"],
-"Motorola":["Edge 50 Pro","Edge 50 Fusion","Edge 40","G84 5G","G54 5G","G34 5G","G24"],
-"Poco":["X6 Pro 5G","X6 5G","X5 Pro 5G","M6 Pro","M6 5G","C65"],
-"Infinix":["GT 20 Pro","Note 40 Pro","Note 40","Hot 40 Pro","Hot 40","Smart 8"]
-};
-
-let selectedBrand="", selectedModel="";
-const brands=document.getElementById("brands"),models=document.getElementById("models"),products=document.getElementById("products"),search=document.getElementById("search");
-
-Object.keys(data).forEach(b=>{
- const el=document.createElement("div");el.className="brand";el.textContent=b;
- el.onclick=()=>selectBrand(b,el);brands.appendChild(el);
-});
-function selectBrand(b,el){
- selectedBrand=b;selectedModel="";
- document.querySelectorAll(".brand").forEach(x=>x.classList.remove("active"));el.classList.add("active");
- document.getElementById("modelTitle").textContent="2. "+b+" Mobile Models";
- document.getElementById("modelHint").textContent="Model par click karein";
- renderModels(data[b]); renderProducts();
-}
-function renderModels(list){
- models.innerHTML="";
- list.forEach(m=>{
-  const el=document.createElement("div");el.className="model";el.textContent=m;
-  el.onclick=()=>{selectedModel=m;renderProducts()};
-  models.appendChild(el);
- });
-}
-function renderProducts(){
- products.innerHTML="";
- if(!selectedBrand){products.innerHTML="<p>Brand select karein.</p>";return}
- const name=selectedModel||selectedBrand+" Back Skin";
- const p=document.createElement("div");p.className="product";
- p.innerHTML=`<div class="pic">📱</div><div class="info"><h3>${name}</h3><p>Premium mobile back skin</p><div class="price">₹199 se</div><a class="btn" target="_blank" href="https://wa.me/919950159562?text=${encodeURIComponent("Namaste Kuldeep Mobile, mujhe "+name+" ki back skin chahiye.")}">💬 WhatsApp Order</a></div>`;
- products.appendChild(p);
-}
-search.oninput=()=>{
- const q=search.value.toLowerCase().trim();
- if(!selectedBrand){let all=[];Object.keys(data).forEach(b=>data[b].forEach(m=>all.push({b,m})));
-  models.innerHTML="";all.filter(x=>x.m.toLowerCase().includes(q)).slice(0,40).forEach(x=>{let el=document.createElement("div");el.className="model";el.textContent=x.b+" • "+x.m;el.onclick=()=>{selectedBrand=x.b;selectedModel=x.m;renderProducts()};models.appendChild(el)});
- } else renderModels(data[selectedBrand].filter(m=>m.toLowerCase().includes(q)));
-};
-renderProducts();
-</script>
-</body>
-</html>
+</body></html>
