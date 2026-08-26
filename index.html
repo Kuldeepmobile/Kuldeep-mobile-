@@ -35,9 +35,10 @@ footer{background:#111827;color:#fff;text-align:center;padding:25px;line-height:
 <div class="wrap">
 <h2 class="center">🎨 Mobile Back Skins</h2>
 <div class="grid">
-<div class="card" onclick="openProduct('3D Engraved Mobile Skin',149,'skin-8998.jpg')"><div class="cardpic" style="padding:10px;background:#fff"><img src="skin-8998.jpg" alt="3D Engraved Mobile Skin" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div><div class="cardinfo"><h3>3D Engraved Mobile Skin</h3><div class="muted">4 photos • Slide करके देखें</div><div class="price">₹149</div></div></div>
-<div class="card" onclick="openProduct('Premium Mobile Skin',100,'premium-skin-15.jpg')"><div class="cardpic" style="padding:10px;background:#fff"><img src="premium-skin-15.jpg" alt="Premium Mobile Skin" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div><div class="cardinfo"><h3>Premium Mobile Skin</h3><div class="muted">5 photos • Slide करके देखें</div><div class="price">₹100</div></div></div>
-<div class="card" onclick="openProduct('Custom Mobile Skin',199,'🖼️')"><div class="cardpic">🖼️</div><div class="cardinfo"><h3>Custom Mobile Skin</h3><div class="price">₹199</div></div></div>
+<div class="card" onclick="openProduct('Transplant Mobile Back',199,'transplant-back-1.jpg')">
+<div class="cardpic" style="padding:10px;background:#fff"><img src="transplant-back-1.jpg" alt="Transplant Mobile Back" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div>
+<div class="cardinfo"><h3>Transplant Mobile Back</h3><div class="muted">4 photos • Slide करके देखें</div><div class="price">₹199</div></div>
+</div></div>
 </div>
 
 <div id="detail" class="detail">
@@ -92,6 +93,9 @@ let sliderImages=[];let sliderIndex=0;
 function setEmoji(e){
  if(e==='tempered-normal.jpg'){
   sliderImages=['tempered-normal.jpg','tempered-dark.jpg']; sliderIndex=0;
+  renderSlider();
+ } else if(e==='transplant-back-1.jpg'){
+  sliderImages=['transplant-back-1.jpg','transplant-back-2.jpg','transplant-back-3.jpg','transplant-back-4.jpg']; sliderIndex=0;
   renderSlider();
  } else if(e==='premium-skin-15.jpg'){
   sliderImages=['premium-skin-15.jpg','premium-skin-16.jpg','premium-skin-17.jpg','premium-skin-18.jpg','premium-skin-19.jpg']; sliderIndex=0;
