@@ -27,7 +27,7 @@ h2.center{text-align:center;margin:8px 0 22px}
 .cart{margin-top:30px;background:#f8fafc;padding:20px;border-radius:16px}.cartrow{display:grid;grid-template-columns:1fr auto auto auto;gap:8px;padding:10px;border-bottom:1px solid #ddd}
 footer{background:#111827;color:#fff;text-align:center;padding:25px;line-height:1.8}
 @media(max-width:700px){.detail.show{grid-template-columns:1fr}.mainphoto{height:340px}.two,.buy,.otherrow{flex-direction:column}}
-</style></head><body>
+.sliderwrap{position:relative;width:100%;height:100%;overflow:hidden}.slideimg{width:100%;height:100%;object-fit:contain;display:block}.slidebtn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:50%;background:#111827dd;color:#fff;font-size:25px;font-weight:900;z-index:3}.slideprev{left:10px}.slidenext{right:10px}.dots{position:absolute;bottom:10px;left:0;right:0;text-align:center;z-index:3}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#cbd5e1;margin:4px}.dot.active{background:#111827}.thumbslide{width:65px;height:65px;border:2px solid #ddd;border-radius:8px;object-fit:contain;cursor:pointer}.thumbslide.active{border-color:#111827}</style></head><body>
 <div class="header">📱 KULDEEP MOBILE<small>Sadar Bazzar, Bilara - 342602</small></div>
 <div class="banner"><img src="rakhi-banner.png" alt="Offer"></div>
 <div class="nav"><input id="siteSearch" placeholder="🔎 Search mobile model / product..."><button onclick="document.getElementById('cart').scrollIntoView({behavior:'smooth'})">🛒 Cart</button></div>
@@ -54,11 +54,7 @@ footer{background:#111827;color:#fff;text-align:center;padding:25px;line-height:
 <div class="grid">
 <div class="card" onclick="openProduct('Normal Tempered Glass',40,'tempered-normal.jpg')">
 <div class="cardpic" style="padding:10px;background:#fff"><img src="tempered-normal.jpg" alt="Normal Tempered Glass" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div>
-<div class="cardinfo"><h3>Normal Tempered Glass</h3><div class="muted">Standard glass</div><div class="price">₹40 – ₹50</div></div>
-</div>
-<div class="card" onclick="openProduct('Premium Tempered Glass',50,'tempered-dark.jpg')">
-<div class="cardpic" style="padding:10px;background:#000"><img src="tempered-dark.jpg" alt="Premium Tempered Glass" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div>
-<div class="cardinfo"><h3>Premium Tempered Glass</h3><div class="muted">Better protection</div><div class="price">₹50</div></div>
+<div class="cardinfo"><h3>Normal Tempered Glass</h3><div class="muted">2 photos • Slide करके देखें</div><div class="price">₹40 – ₹50</div></div>
 </div>
 </div></div>
 
@@ -81,7 +77,26 @@ function fillModels(q='',b='all'){let a=data.filter(x=>x.model.toLowerCase().inc
 function chooseModel(m){openProduct('3D Engraved Mobile Skin',199,'🎨');setTimeout(()=>document.getElementById('modelSelect').value=m,50)}
 function openProduct(n,p,e){current={name:n,price:p,emoji:e};qtyNow=1;document.getElementById('q').textContent=1;document.getElementById('pname').textContent=n;document.getElementById('pprice').textContent='₹'+p;setEmoji(e);document.getElementById('detail').classList.add('show');document.getElementById('detail').scrollIntoView({behavior:'smooth'})}
 function closeProduct(){document.getElementById('detail').classList.remove('show')}
-function setEmoji(e){if(typeof e==='string' && /\.(jpg|jpeg|png|webp)$/i.test(e)){document.getElementById('mainPhoto').innerHTML='<img src="'+e+'" alt="Product image" style="max-width:100%;max-height:100%;object-fit:contain">'}else{document.getElementById('mainPhoto').innerHTML='<span style="font-size:150px">'+e+'</span>'}}
+let sliderImages=[];let sliderIndex=0;
+function setEmoji(e){
+ if(e==='tempered-normal.jpg'){
+  sliderImages=['tempered-normal.jpg','tempered-dark.jpg']; sliderIndex=0;
+  renderSlider();
+ } else if(typeof e==='string' && /\.(jpg|jpeg|png|webp)$/i.test(e)){
+  sliderImages=[e]; sliderIndex=0; renderSlider();
+ } else {
+  sliderImages=[]; document.getElementById('mainPhoto').innerHTML='<span style="font-size:150px">'+e+'</span>';
+ }
+}
+function renderSlider(){
+ const main=document.getElementById('mainPhoto');
+ if(!sliderImages.length)return;
+ main.innerHTML='<div class="sliderwrap"><img class="slideimg" src="'+sliderImages[sliderIndex]+'" alt="Product image '+(sliderIndex+1)+' of '+sliderImages.length+'"><button class="slidebtn slideprev" type="button" onclick="slide(-1)">‹</button><button class="slidebtn slidenext" type="button" onclick="slide(1)">›</button><div class="dots">'+sliderImages.map((_,i)=>'<span class="dot '+(i===sliderIndex?'active':'')+'" onclick="goSlide('+i+')"></span>').join('')+'</div></div>';
+ const thumbs=document.querySelector('.thumbs');
+ if(thumbs) thumbs.innerHTML=sliderImages.map((im,i)=>'<img class="thumbslide '+(i===sliderIndex?'active':'')+'" src="'+im+'" alt="Photo '+(i+1)+'" onclick="goSlide('+i+')">').join('');
+}
+function slide(d){sliderIndex=(sliderIndex+d+sliderImages.length)%sliderImages.length;renderSlider()}
+function goSlide(i){sliderIndex=i;renderSlider()}
 function qty(d){qtyNow=Math.max(1,qtyNow+d);document.getElementById('q').textContent=qtyNow}
 function addProduct(){let m=document.getElementById('modelSelect').value;if(!m&&current.name.includes('Skin'))return alert('Pehle mobile model select karein');addCart(current.name+(m?' - '+m:''),current.price,qtyNow)}
 function orderProduct(){let m=document.getElementById('modelSelect').value;if(!m&&current.name.includes('Skin'))return alert('Pehle mobile model select karein');let text='Namaste Kuldeep Mobile, mujhe '+current.name+(m?' - '+m:'')+' chahiye. Quantity: '+qtyNow+'. Price: ₹'+current.price+' each. Parcel charge alag se.';window.open('https://wa.me/919950159562?text='+encodeURIComponent(text),'_blank')}
