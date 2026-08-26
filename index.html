@@ -35,7 +35,7 @@ footer{background:#111827;color:#fff;text-align:center;padding:25px;line-height:
 <div class="wrap">
 <h2 class="center">🎨 Mobile Back Skins</h2>
 <div class="grid">
-<div class="card" onclick="openProduct('3D Engraved Mobile Skin',199,'🎨')"><div class="cardpic">🎨</div><div class="cardinfo"><h3>3D Engraved Mobile Skin</h3><div class="muted">Premium finish</div><div class="price">₹199</div></div></div>
+<div class="card" onclick="openProduct('3D Engraved Mobile Skin',149,'skin-8998.jpg')"><div class="cardpic" style="padding:10px;background:#fff"><img src="skin-8998.jpg" alt="3D Engraved Mobile Skin" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div><div class="cardinfo"><h3>3D Engraved Mobile Skin</h3><div class="muted">4 photos • Slide करके देखें</div><div class="price">₹149</div></div></div>
 <div class="card" onclick="openProduct('Premium Designer Skin',199,'✨')"><div class="cardpic">✨</div><div class="cardinfo"><h3>Premium Designer Skin</h3><div class="price">₹199</div></div></div>
 <div class="card" onclick="openProduct('Custom Mobile Skin',199,'🖼️')"><div class="cardpic">🖼️</div><div class="cardinfo"><h3>Custom Mobile Skin</h3><div class="price">₹199</div></div></div>
 </div>
@@ -92,6 +92,9 @@ let sliderImages=[];let sliderIndex=0;
 function setEmoji(e){
  if(e==='tempered-normal.jpg'){
   sliderImages=['tempered-normal.jpg','tempered-dark.jpg']; sliderIndex=0;
+  renderSlider();
+ } else if(e==='skin-8998.jpg'){
+  sliderImages=['skin-8998.jpg','skin-8999.jpg','skin-9000.jpg','skin-9001.jpg']; sliderIndex=0;
   renderSlider();
  } else if(e==='charger-2.jpg'){
   sliderImages=['charger-2.jpg','charger-3.jpg','charger-4.jpg','charger-5.jpg','charger-6.jpg','charger-7.jpg']; sliderIndex=0;
