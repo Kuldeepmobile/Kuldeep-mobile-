@@ -27,7 +27,17 @@ h2.center{text-align:center;margin:8px 0 22px}
 .cart{margin-top:30px;background:#f8fafc;padding:20px;border-radius:16px}.cartrow{display:grid;grid-template-columns:1fr auto auto auto;gap:8px;padding:10px;border-bottom:1px solid #ddd}
 footer{background:#111827;color:#fff;text-align:center;padding:25px;line-height:1.8}
 @media(max-width:700px){.detail.show{grid-template-columns:1fr}.mainphoto{height:340px}.two,.buy,.otherrow{flex-direction:column}}
-.sliderwrap{position:relative;width:100%;height:100%;overflow:hidden}.slideimg{width:100%;height:100%;object-fit:contain;display:block}.slidebtn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:50%;background:#111827dd;color:#fff;font-size:25px;font-weight:900;z-index:3}.slideprev{left:10px}.slidenext{right:10px}.dots{position:absolute;bottom:10px;left:0;right:0;text-align:center;z-index:3}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#cbd5e1;margin:4px}.dot.active{background:#111827}.thumbslide{width:65px;height:65px;border:2px solid #ddd;border-radius:8px;object-fit:contain;cursor:pointer}.thumbslide.active{border-color:#111827}</style></head><body>
+.sliderwrap{position:relative;width:100%;height:100%;overflow:hidden}.slideimg{width:100%;height:100%;object-fit:contain;display:block}.slidebtn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:50%;background:#111827dd;color:#fff;font-size:25px;font-weight:900;z-index:3}.slideprev{left:10px}.slidenext{right:10px}.dots{position:absolute;bottom:10px;left:0;right:0;text-align:center;z-index:3}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#cbd5e1;margin:4px}.dot.active{background:#111827}.thumbslide{width:65px;height:65px;border:2px solid #ddd;border-radius:8px;object-fit:contain;cursor:pointer}.thumbslide.active{border-color:#111827}</style>
+<style>
+.cart-badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;margin-left:6px;border-radius:999px;background:#e53935;color:#fff;font-size:12px;font-weight:700}
+.cart-item-row{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #ddd}
+.cart-item-row img{width:58px;height:58px;object-fit:contain;border-radius:8px;background:#fff}
+.cart-item-info{flex:1}
+.cart-item-model{font-size:13px;font-weight:600}
+.cart-item-qty{font-size:13px;opacity:.75}
+</style>
+
+</head><body>
 <div class="header">📱 KULDEEP MOBILE<small>Sadar Bazzar, Bilara - 342602</small></div>
 <div class="banner"><img src="rakhi-banner.png" alt="Offer"></div>
 <div class="nav"><input id="siteSearch" placeholder="🔎 Search mobile model / product..."><button onclick="document.getElementById('cart').scrollIntoView({behavior:'smooth'})">🛒 Cart</button></div>
@@ -133,7 +143,9 @@ function goSlide(i){sliderIndex=i;renderSlider()}
 function qty(d){qtyNow=Math.max(1,qtyNow+d);document.getElementById('q').textContent=qtyNow}
 function addProduct(){let m=document.getElementById('modelSelect').value;if(!m&&current.name.includes('Skin'))return alert('Pehle mobile model select karein');addCart(current.name+(m?' - '+m:''),current.price,qtyNow)}
 function orderProduct(){let m=document.getElementById('modelSelect').value;if(!m&&current.name.includes('Skin'))return alert('Pehle mobile model select karein');let text='Namaste Kuldeep Mobile, mujhe '+current.name+(m?' - '+m:'')+' chahiye. Quantity: '+qtyNow+'. Price: ₹'+current.price+' each. Parcel charge alag se.';window.open('https://wa.me/919950159562?text='+encodeURIComponent(text),'_blank')}
-function addCart(n,p,q=1){let x=cart.find(a=>a.n===n);if(x)x.q+=q;else cart.push({n:n,p:p,q:q});render()}
+function addCart(n,p,q=1){let x=cart.find(a=>a.n===n);if(x)x.q+=q;else cart.push({n:n,p:p,q:q
+ updateCartBadge();
+});render()}
 function render(){let s=0;document.getElementById('cartItems').innerHTML=cart.length?cart.map((x,i)=>{s+=x.p*x.q;return '<div class="cartrow"><b>'+x.n+'</b><span>₹'+x.p+'</span><span>'+x.q+'</span><button onclick="cart.splice('+i+',1);render()">❌</button></div>'}).join(''):'Cart empty hai.';document.getElementById('total').textContent='Total: ₹'+s}
 function sendCart(){if(!cart.length)return alert('Cart empty hai');let s=cart.reduce((a,x)=>a+x.p*x.q,0);let text='Namaste Kuldeep Mobile, mujhe ye order chahiye:%0A'+cart.map((x,i)=>(i+1)+'. '+x.n+' x '+x.q+' = ₹'+(x.p*x.q)).join('%0A')+'%0ATotal ₹'+s+'%0AParcel charge alag se.';window.open('https://wa.me/919950159562?text='+text,'_blank')}
 function otherModel(){let m=document.getElementById('other').value.trim();if(!m)return alert('Model ka naam likhein');window.open('https://wa.me/919950159562?text='+encodeURIComponent('Namaste Kuldeep Mobile, mera model catalogue mein nahi mila. Model: '+m+'. Back skin available hai kya? Price bataiye.'),'_blank')}
@@ -141,4 +153,30 @@ function toggleModels(){const p=document.getElementById('modelSearchPanel'),b=do
 document.getElementById('detailSearch').addEventListener('input',e=>fillModels(e.target.value,document.getElementById('detailBrand').value));document.getElementById('detailBrand').addEventListener('change',e=>fillModels(document.getElementById('detailSearch').value,e.target.value));
 document.getElementById('allSearch').addEventListener('input',e=>fillModels(e.target.value,document.getElementById('allBrand').value));document.getElementById('allBrand').addEventListener('change',e=>fillModels(document.getElementById('allSearch').value,e.target.value));
 document.getElementById('siteSearch').addEventListener('input',e=>fillModels(e.target.value,'all'));fillModels();render();
-</script></body></html>
+</script>
+<script>
+function getCartArray(){
+  try { return JSON.parse(localStorage.getItem('cart') || '[]'); }
+  catch(e){ return []; }
+}
+function updateCartBadge(){
+  const cart=getCartArray();
+  const count=cart.reduce((n,i)=>n+(Number(i.qty)||1),0);
+  const badge=document.getElementById('cartCount');
+  if(badge) badge.textContent=count;
+  if(badge) badge.style.display=count>0?'inline-flex':'none';
+}
+document.addEventListener('DOMContentLoaded', updateCartBadge);
+</script>
+
+
+<script>
+document.addEventListener('click', function(e){
+  const b=e.target.closest('button');
+  if(b && /add\s*to\s*cart/i.test(b.textContent||'')){
+    setTimeout(updateCartBadge, 50);
+  }
+});
+</script>
+
+</body></html>
