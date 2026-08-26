@@ -36,13 +36,13 @@ footer{background:#111827;color:#fff;text-align:center;padding:25px;line-height:
 <h2 class="center">🎨 Mobile Back Skins</h2>
 <div class="grid">
 <div class="card" onclick="openProduct('3D Engraved Mobile Skin',149,'skin-8998.jpg')"><div class="cardpic" style="padding:10px;background:#fff"><img src="skin-8998.jpg" alt="3D Engraved Mobile Skin" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div><div class="cardinfo"><h3>3D Engraved Mobile Skin</h3><div class="muted">4 photos • Slide करके देखें</div><div class="price">₹149</div></div></div>
-<div class="card" onclick="openProduct('Premium Designer Skin',199,'✨')"><div class="cardpic">✨</div><div class="cardinfo"><h3>Premium Designer Skin</h3><div class="price">₹199</div></div></div>
+<div class="card" onclick="openProduct('Premium Mobile Skin',100,'premium-skin-15.jpg')"><div class="cardpic" style="padding:10px;background:#fff"><img src="premium-skin-15.jpg" alt="Premium Mobile Skin" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div><div class="cardinfo"><h3>Premium Mobile Skin</h3><div class="muted">5 photos • Slide करके देखें</div><div class="price">₹100</div></div></div>
 <div class="card" onclick="openProduct('Custom Mobile Skin',199,'🖼️')"><div class="cardpic">🖼️</div><div class="cardinfo"><h3>Custom Mobile Skin</h3><div class="price">₹199</div></div></div>
 </div>
 
 <div id="detail" class="detail">
 <div><button class="back" onclick="closeProduct()">← Back</button><div class="mainphoto" id="mainPhoto">🎨</div><div class="thumbs"><div class="thumb" onclick="setEmoji('🎨')">🎨</div><div class="thumb" onclick="setEmoji('✨')">✨</div><div class="thumb" onclick="setEmoji('🖼️')">🖼️</div></div></div>
-<div><h1 id="pname">3D Engraved Mobile Skin</h1><div class="price" id="pprice">₹199</div><p>Premium mobile back skin. Model-wise fitting available.</p>
+<div><h1 id="pname">3D Engraved Mobile Skin</h1><div class="price" id="pprice">₹149</div><p>Premium mobile back skin. Model-wise fitting available.</p>
 <label><b>Choose Your Model</b></label><select id="modelSelect" class="select"><option value="">-- Select Model --</option></select>
 <div class="two"><input id="detailSearch" class="searchinput" placeholder="🔎 Model search"><select id="detailBrand" class="select"><option value="all">All Brands</option><option value="Samsung">Samsung</option><option value="Apple">Apple</option><option value="Xiaomi / Redmi">Xiaomi / Redmi</option><option value="Motorola">Motorola</option><option value="Vivo">Vivo</option><option value="OPPO">OPPO</option><option value="Realme">Realme</option><option value="OnePlus">OnePlus</option><option value="iQOO">iQOO</option><option value="POCO">POCO</option><option value="Google Pixel">Google Pixel</option><option value="Nothing / CMF">Nothing / CMF</option><option value="Honor">Honor</option><option value="Infinix">Infinix</option><option value="Tecno">Tecno</option><option value="Lava">Lava</option><option value="Nokia / HMD">Nokia / HMD</option><option value="Asus">Asus</option><option value="Sony">Sony</option><option value="Micromax">Micromax</option><option value="itel">itel</option><option value="Jio">Jio</option><option value="ZTE / Nubia">ZTE / Nubia</option><option value="LG">LG</option><option value="HTC">HTC</option><option value="Gionee">Gionee</option><option value="Xolo">Xolo</option><option value="Panasonic">Panasonic</option><option value="Coolpad">Coolpad</option><option value="BlackBerry">BlackBerry</option><option value="LeEco">LeEco</option><option value="Lenovo">Lenovo</option><option value="Karbonn">Karbonn</option><option value="Spice">Spice</option><option value="iBall">iBall</option><option value="Videocon">Videocon</option><option value="Alcatel">Alcatel</option><option value="Black Shark">Black Shark</option><option value="TCL">TCL</option><option value="Sharp">Sharp</option><option value="Philips">Philips</option><option value="Microsoft">Microsoft</option><option value="Fly">Fly</option><option value="Zen">Zen</option><option value="Celkon">Celkon</option><option value="Archos">Archos</option><option value="Sharp / Aquos">Sharp / Aquos</option><option value="10.or">10.or</option><option value="Obi">Obi</option><option value="LYF">LYF</option></select></div>
 <div class="qty"><button onclick="qty(-1)">−</button><b id="q">1</b><button onclick="qty(1)">+</button></div>
@@ -92,6 +92,9 @@ let sliderImages=[];let sliderIndex=0;
 function setEmoji(e){
  if(e==='tempered-normal.jpg'){
   sliderImages=['tempered-normal.jpg','tempered-dark.jpg']; sliderIndex=0;
+  renderSlider();
+ } else if(e==='premium-skin-15.jpg'){
+  sliderImages=['premium-skin-15.jpg','premium-skin-16.jpg','premium-skin-17.jpg','premium-skin-18.jpg','premium-skin-19.jpg']; sliderIndex=0;
   renderSlider();
  } else if(e==='premium-skin-15.jpg'){
   sliderImages=['premium-skin-15.jpg','premium-skin-16.jpg','premium-skin-17.jpg','premium-skin-18.jpg','premium-skin-19.jpg']; sliderIndex=0;
