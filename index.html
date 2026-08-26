@@ -134,7 +134,7 @@ function setEmoji(e){
 function renderSlider(){
  const main=document.getElementById('mainPhoto');
  if(!sliderImages.length)return;
- main.innerHTML='<div class="sliderwrap"><img class="slideimg" src="'+sliderImages[sliderIndex]+'" alt="Product image '+(sliderIndex+1)+' of '+sliderImages.length+'"><button class="slidebtn slideprev" type="button" onclick="slide(-1)">‹</button><button class="slidebtn slidenext" type="button" onclick="slide(1)">›</button><div class="dots">'+sliderImages.map((_,i)=>'<span class="dot '+(i===sliderIndex?'active':'')+'" onclick="goSlide('+i+')"></span>').join('')+'</div></div>';
+ main.innerHTML='<div class="sliderwrap"><img class="slideimg" onclick="openImageZoom(this.src)" style="cursor:zoom-in" src="'+sliderImages[sliderIndex]+'" alt="Product image '+(sliderIndex+1)+' of '+sliderImages.length+'"><button class="slidebtn slideprev" type="button" onclick="slide(-1)">‹</button><button class="slidebtn slidenext" type="button" onclick="slide(1)">›</button><div class="dots">'+sliderImages.map((_,i)=>'<span class="dot '+(i===sliderIndex?'active':'')+'" onclick="goSlide('+i+')"></span>').join('')+'</div></div>';
  const thumbs=document.querySelector('.thumbs');
  if(thumbs) thumbs.innerHTML=sliderImages.map((im,i)=>'<img class="thumbslide '+(i===sliderIndex?'active':'')+'" src="'+im+'" alt="Photo '+(i+1)+'" onclick="goSlide('+i+')">').join('');
 }
@@ -176,6 +176,83 @@ document.addEventListener('click', function(e){
   if(b && /add\s*to\s*cart/i.test(b.textContent||'')){
     setTimeout(updateCartBadge, 50);
   }
+});
+</script>
+
+
+<!-- Full-screen product image zoom -->
+<div id="imageZoom" class="image-zoom" onclick="closeImageZoom(event)">
+  <button class="zoom-close" type="button" onclick="closeImageZoom()">×</button>
+  <img id="zoomImage" src="" alt="Product image enlarged">
+  <div class="zoom-hint">Tap outside or × to close</div>
+</div>
+
+<style>
+.image-zoom{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  background:rgba(0,0,0,.92);
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+.image-zoom.show{display:flex}
+.image-zoom img{
+  max-width:96vw;
+  max-height:90vh;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  border-radius:10px;
+  cursor:zoom-out;
+  box-shadow:0 8px 35px rgba(0,0,0,.45);
+}
+.zoom-close{
+  position:absolute;
+  top:12px;
+  right:14px;
+  z-index:2;
+  width:46px;
+  height:46px;
+  border:0;
+  border-radius:50%;
+  background:#fff;
+  color:#111;
+  font-size:34px;
+  line-height:40px;
+  cursor:pointer;
+}
+.zoom-hint{
+  position:absolute;
+  bottom:14px;
+  left:0;
+  right:0;
+  text-align:center;
+  color:#fff;
+  font-size:13px;
+  opacity:.8;
+}
+</style>
+
+<script>
+function openImageZoom(src){
+  const box=document.getElementById('imageZoom');
+  const img=document.getElementById('zoomImage');
+  if(!box || !img) return;
+  img.src=src;
+  box.classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeImageZoom(e){
+  if(e && e.target && e.target.id==='zoomImage') return;
+  const box=document.getElementById('imageZoom');
+  if(box) box.classList.remove('show');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') closeImageZoom();
 });
 </script>
 
