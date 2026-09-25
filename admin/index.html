@@ -55,7 +55,12 @@ button{border:0;background:#111;color:#fff;font-weight:700}.green{background:#12
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
+<script>
+const SUPABASE_URL = "https://huousyafsqmfjazwjphz.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_dGH5vs_CIFYDmL1PezBoWw_hpcpJhm5";
+const SUPABASE_BUCKET = "Skin-photo";
+const SUPABASE_TABLE = "skin_photos";
+</script>
 <script>
 let db;
 function init(){
@@ -64,10 +69,12 @@ function init(){
  db=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY); return "";
 }
 async function loginAdmin(){
+ const msg=document.getElementById('loginMsg'); msg.textContent='⏳ Login check ho raha hai...';
  const e=document.getElementById('email').value.trim(),p=document.getElementById('password').value;
- const err=init(); if(err){document.getElementById('loginMsg').textContent=err;return}
- const r=await db.auth.signInWithPassword({email:e,password:p});
- if(r.error){document.getElementById('loginMsg').textContent=r.error.message;return}
+ const err=init(); if(err){msg.textContent=err;return}
+ let r;
+ try { r=await db.auth.signInWithPassword({email:e,password:p}); } catch(ex) { msg.textContent="❌ Error: "+(ex?.message||ex); return; }
+ if(r.error){msg.textContent="❌ "+r.error.message;return}
  document.getElementById('loginBox').style.display='none'; document.getElementById('dashboard').classList.remove('hide');
 }
 function showPreview(a,b){const f=document.getElementById(a).files[0];if(!f)return;const x=document.getElementById(b);x.src=URL.createObjectURL(f);x.style.display='block'}
