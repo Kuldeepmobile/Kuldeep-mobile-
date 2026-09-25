@@ -69,16 +69,24 @@ footer{background:#111827;color:#fff;text-align:center;padding:25px;line-height:
 
 <div class="box"><h2 class="center">🔌 Mobile Accessories</h2>
 <div class="grid">
-<div class="card" onclick="openProduct('Fast Charger 25W',249,'charger-2.jpg')">
+<div class="card" onclick="openProduct('Fast Charger 25W',999,'charger-2.jpg')">
 <div class="cardpic" style="padding:10px;background:#fff"><img src="charger-2.jpg" alt="Fast Charger" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div>
-<div class="cardinfo"><h3>Fast Charger 25W</h3><div class="muted">6 photos • Slide करके देखें</div><div class="price">₹249</div></div>
+<div class="cardinfo"><h3>Fast Charger 25W</h3><div class="muted">6 photos • Slide करके देखें</div><div class="price">₹999</div></div>
 </div>
-<div class="card" onclick="openProduct('UBON Type-C Data Cable',149,'data-cable-1.jpeg')">
+<div class="card" onclick="openProduct('UBON Type-C Data Cable',249,'data-cable-1.jpeg')">
 <div class="cardpic" style="padding:10px;background:#fff"><img src="data-cable-1.jpeg" alt="UBON Type-C Data Cable" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div>
-<div class="cardinfo"><h3>UBON Type-C Data Cable</h3><div class="muted">5 photos • Slide करके देखें</div><div class="price">₹149 – ₹199</div></div>
+<div class="cardinfo"><h3>UBON Type-C Data Cable</h3><div class="muted">5 photos • Slide करके देखें</div><div class="price">₹249</div></div>
 </div>
 <div class="card" onclick="openProduct('Mobile Cover',149,'📱')"><div class="cardpic">📱</div><div class="cardinfo"><h3>Mobile Cover</h3><div class="price">₹149</div></div></div>
 </div></div>
+
+<div class="box" id="repairSection"><h2 class="center">🛠️ Mobile Repair</h2>
+<div class="card" onclick="openRepair()">
+<div class="cardpic">🛠️📱</div>
+<div class="cardinfo"><h3>Mobile Repair</h3><div class="muted">Screen • Battery • Charging • Software • Speaker • Camera</div><div class="price">Repair Service</div></div>
+</div></div>
+
+<div id="repairDetail" class="detail" style="display:none"><div><button class="back" onclick="closeRepair()">← Back</button><div class="mainphoto" style="font-size:110px">🛠️📱</div></div><div><h1>Mobile Repair</h1><div class="price">Kuldeep Mobile</div><p>अपने मोबाइल की repair के लिए नीचे service चुनें और WhatsApp पर जानकारी भेजें।</p><div class="box"><h3>Repair Services</h3><p>📱 Screen / Display Repair<br>🔋 Battery Replacement<br>🔌 Charging Problem Repair<br>💻 Software / Hang Problem<br>💧 Water Damage Check<br>🔊 Speaker / Mic Problem<br>📷 Camera Problem</p></div><div class="buy"><button class="wa" onclick="repairWhatsApp()">💬 WhatsApp पर पूछें</button></div></div></div>
 
 <div class="box"><h2 class="center">📱 Mobile Model Search</h2>
 <p style="text-align:center;color:#6b7280">जरूरत होने पर model search करें और model पर click करें।</p>
@@ -92,11 +100,6 @@ footer{background:#111827;color:#fff;text-align:center;padding:25px;line-height:
 
 <div class="cart" id="cart"><h2>🛒 Cart</h2><div id="cartItems">Cart empty hai.</div><h3 id="total">Total: ₹0</h3><button class="wa" style="padding:13px 18px;border:0;border-radius:9px;font-weight:900" onclick="sendCart()">💬 WhatsApp Order</button><p>📦 Parcel charge अलग से लगेगा।</p></div>
 </div>
-
-<section id="adminProductsSection" class="wrap" style="display:none">
-  <h2 class="center">🆕 नए Products</h2>
-  <div id="adminProductsGrid" class="grid"></div>
-</section>
 <footer><b>Kuldeep Mobile</b><br>📍 Sadar Bazzar, Bilara - 342602<br>📞 9950159562<br><a class="wa" style="display:inline-block;margin-top:8px;padding:11px 16px;text-decoration:none;border-radius:9px" href="https://wa.me/919950159562">WhatsApp करें</a><br>📦 Parcel charge अलग से</footer>
 
 <script>
@@ -148,46 +151,11 @@ function addCart(n,p,q=1){let x=cart.find(a=>a.n===n);if(x)x.q+=q;else cart.push
 function render(){let s=0,c=0;document.getElementById('cartItems').innerHTML=cart.length?cart.map((x,i)=>{s+=x.p*x.q;c+=x.q;return '<div class="cartrow"><b>'+x.n+'</b><span>₹'+x.p+'</span><span>'+x.q+'</span><button onclick="cart.splice('+i+',1);render()">❌</button></div>'}).join(''):'Cart empty hai.';document.getElementById('total').textContent='Total: ₹'+s;let b=document.getElementById('cartBtn');if(b)b.textContent='🛒 Cart ('+c+')'}
 function sendCart(){if(!cart.length)return alert('Cart empty hai');let s=cart.reduce((a,x)=>a+x.p*x.q,0);let text='Namaste Kuldeep Mobile, mujhe ye order chahiye:%0A'+cart.map((x,i)=>(i+1)+'. '+x.n+' x '+x.q+' = ₹'+(x.p*x.q)).join('%0A')+'%0ATotal ₹'+s+'%0AParcel charge alag se.';window.open('https://wa.me/919950159562?text='+text,'_blank')}
 function otherModel(){let m=document.getElementById('other').value.trim();if(!m)return alert('Model ka naam likhein');window.open('https://wa.me/919950159562?text='+encodeURIComponent('Namaste Kuldeep Mobile, mera model catalogue mein nahi mila. Model: '+m+'. Back skin available hai kya? Price bataiye.'),'_blank')}
+function openRepair(){document.getElementById('repairDetail').style.display='grid';document.getElementById('repairDetail').classList.add('show');document.getElementById('repairDetail').scrollIntoView({behavior:'smooth'})}
+function closeRepair(){document.getElementById('repairDetail').style.display='none';document.getElementById('repairDetail').classList.remove('show')}
+function repairWhatsApp(){window.open('https://wa.me/919950159562?text='+encodeURIComponent('Namaste Kuldeep Mobile, mujhe mobile repair ke baare mein poochna hai.'),'_blank')}
 function toggleModels(){const p=document.getElementById('modelSearchPanel'),b=document.getElementById('showModelsBtn');const open=p.style.display!=='none';p.style.display=open?'none':'block';b.textContent=open?'🔎 Model Search खोलें':'✖️ Model Search बंद करें';if(!open)document.getElementById('allSearch').focus()}
 document.getElementById('detailSearch').addEventListener('input',e=>fillModels(e.target.value,document.getElementById('detailBrand').value));document.getElementById('detailBrand').addEventListener('change',e=>fillModels(document.getElementById('detailSearch').value,e.target.value));
 document.getElementById('allSearch').addEventListener('input',e=>fillModels(e.target.value,document.getElementById('allBrand').value));document.getElementById('allBrand').addEventListener('change',e=>fillModels(document.getElementById('allSearch').value,e.target.value));
 document.getElementById('siteSearch').addEventListener('input',e=>fillModels(e.target.value,'all'));fillModels();render();
-</script>
-<script>
-const KULDEEP_SUPABASE_URL='https://huousyafsqmfjazwjphz.supabase.co';
-const KULDEEP_SUPABASE_KEY='sb_publishable_dGH5vs_CIFYDmL1PezBoWw_hpcpJhm5';
-const KULDEEP_SUPABASE_BUCKET='Skin-photo';
-const KULDEEP_SUPABASE_TABLE='skin_photos';
-
-function kdPublicUrl(path){
-  return KULDEEP_SUPABASE_URL+'/storage/v1/object/public/'+KULDEEP_SUPABASE_BUCKET+'/'+String(path||'').split('/').map(encodeURIComponent).join('/');
-}
-function kdEsc(v){
-  return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-}
-async function kdLoadProducts(){
-  try{
-    const url=KULDEEP_SUPABASE_URL+'/rest/v1/'+KULDEEP_SUPABASE_TABLE+'?select=id,title,brand,model,price,offer,image_path&order=created_at.desc';
-    const res=await fetch(url,{headers:{apikey:KULDEEP_SUPABASE_KEY,Authorization:'Bearer '+KULDEEP_SUPABASE_KEY}});
-    if(!res.ok) return;
-    const rows=await res.json();
-    if(!Array.isArray(rows)||!rows.length) return;
-    const grid=document.getElementById('adminProductsGrid');
-    grid.innerHTML=rows.map(x=>{
-      const img=kdPublicUrl(x.image_path);
-      const name=x.title||x.model||x.brand||'Product';
-      const price=(x.price!==null&&x.price!==undefined&&x.price!=='')?'₹'+x.price:'';
-      const sub=[x.brand,x.model].filter(Boolean).join(' • ');
-      const offer=x.offer?'<div class="muted">🎁 '+kdEsc(x.offer)+'</div>':'';
-      const jsName=String(name).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-      const jsImg=String(img).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-      return '<div class="card" onclick="openProduct(\''+jsName+'\','+(Number(x.price)||0)+',\''+jsImg+'\')">'
-        +'<div class="cardpic" style="padding:10px;background:#fff"><img src="'+kdEsc(img)+'" alt="'+kdEsc(name)+'" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div>'
-        +'<div class="cardinfo"><h3>'+kdEsc(name)+'</h3><div class="muted">'+kdEsc(sub)+'</div>'+offer+'<div class="price">'+price+'</div></div></div>';
-    }).join('');
-    document.getElementById('adminProductsSection').style.display='block';
-  }catch(e){console.log('Supabase product load error',e);}
-}
-window.addEventListener('load',kdLoadProducts);
-</script>
-</body></html>
+</script></body></html>
