@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kuldeep Mobile - Admin Dashboard</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5f7;font-family:Arial,sans-serif;color:#111}
+.wrap{max-width:650px;margin:auto;padding:16px}.card{background:#fff;border-radius:18px;padding:18px;margin:12px 0;box-shadow:0 3px 15px #0001}
+h1{margin:0 0 5px}.muted{color:#666;font-size:14px}.hide{display:none}
+input,button,select{width:100%;padding:13px;margin:7px 0;border-radius:10px;border:1px solid #ccc;font-size:16px}
+button{border:0;background:#111;color:#fff;font-weight:700}.green{background:#128c4a}.red{background:#c62828}
+.preview{width:100%;max-height:260px;object-fit:contain;border-radius:12px;display:none;margin-top:8px}
+.msg{padding:10px;border-radius:10px;background:#eef5ff;margin-top:8px;white-space:pre-wrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card"><h1>📱 KULDEEP MOBILE</h1><div class="muted">Admin Dashboard — Photo, Price, Offer & Poster</div></div>
+
+<div id="loginBox" class="card">
+<h3>🔐 Admin Login</h3>
+<input id="email" type="email" placeholder="Admin Email">
+<input id="password" type="password" placeholder="Password">
+<button type="button" onclick="loginAdmin()">Login</button>
+<div id="loginMsg" class="msg"></div>
+</div>
+
+<div id="dashboard" class="hide">
+<div class="card">
+<h3>📸 Product / Photo Add</h3>
+<input id="title" placeholder="Product / Offer name">
+<input id="brand" placeholder="Brand">
+<input id="model" placeholder="Mobile model">
+<input id="price" type="number" placeholder="Price ₹">
+<input id="offer" placeholder="Offer text (optional)">
+<input id="photo" type="file" accept="image/*" onchange="showPreview('photo','photoPreview')">
+<img id="photoPreview" class="preview">
+<button class="green" onclick="addProduct()">➕ Add to Website</button>
+<div id="productMsg" class="msg"></div>
+</div>
+
+<div class="card">
+<h3>🎁 Offer Poster</h3>
+<input id="poster" type="file" accept="image/*" onchange="showPreview('poster','posterPreview')">
+<img id="posterPreview" class="preview">
+<button onclick="addPoster()">🖼️ Poster Add</button>
+<div id="posterMsg" class="msg"></div>
+</div>
+
+<div class="card">
+<button class="red" onclick="logout()">Logout</button>
+</div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../config.js"></script>
+<script>
+let db;
+function init(){
+ if(!window.supabase)return "Supabase library load nahi hui.";
+ if(!SUPABASE_URL||!SUPABASE_PUBLISHABLE_KEY)return "config.js mein Supabase details bharni hain.";
+ db=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY); return "";
+}
+async function loginAdmin(){
+ const e=document.getElementById('email').value.trim(),p=document.getElementById('password').value;
+ const err=init(); if(err){document.getElementById('loginMsg').textContent=err;return}
+ const r=await db.auth.signInWithPassword({email:e,password:p});
+ if(r.error){document.getElementById('loginMsg').textContent=r.error.message;return}
+ document.getElementById('loginBox').style.display='none'; document.getElementById('dashboard').classList.remove('hide');
+}
+function showPreview(a,b){const f=document.getElementById(a).files[0];if(!f)return;const x=document.getElementById(b);x.src=URL.createObjectURL(f);x.style.display='block'}
+function safe(s){return s.replace(/[^a-zA-Z0-9._-]+/g,'-').toLowerCase()}
+async function addProduct(){
+ const err=init();if(err){document.getElementById('productMsg').textContent=err;return}
+ const {data:{user}}=await db.auth.getUser();if(!user){document.getElementById('productMsg').textContent='Login karein.';return}
+ const f=document.getElementById('photo').files[0];if(!f){document.getElementById('productMsg').textContent='Photo select karein.';return}
+ const path='products/'+Date.now()+'-'+safe(f.name);
+ let r=await db.storage.from(SUPABASE_BUCKET).upload(path,f);
+ if(r.error){productMsg.textContent=r.error.message;return}
+ r=await db.from(SUPABASE_TABLE).insert({
+   title:document.getElementById('title').value.trim(),brand:document.getElementById('brand').value.trim(),model:document.getElementById('model').value.trim(),
+   price:document.getElementById('price').value?Number(document.getElementById('price').value):null,offer:document.getElementById('offer').value.trim(),image_path:path
+ });
+ document.getElementById('productMsg').textContent=r.error?'Database error: '+r.error.message:'✅ Website ke liye product/photo add ho gaya.';
+}
+async function addPoster(){
+ const err=init();if(err){document.getElementById('posterMsg').textContent=err;return}
+ const {data:{user}}=await db.auth.getUser();if(!user){document.getElementById('posterMsg').textContent='Login karein.';return}
+ const f=document.getElementById('poster').files[0];if(!f){document.getElementById('posterMsg').textContent='Poster select karein.';return}
+ const path='posters/'+Date.now()+'-'+safe(f.name);
+ const r=await db.storage.from(SUPABASE_BUCKET).upload(path,f);
+ document.getElementById('posterMsg').textContent=r.error?'Upload error: '+r.error.message:'✅ Poster upload ho gaya.';
+}
+async function logout(){if(db)await db.auth.signOut();location.reload()}
+</script>
+</body></html>
