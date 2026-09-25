@@ -49,12 +49,6 @@ footer{background:#111827;color:#fff;text-align:center;padding:25px;line-height:
 </div>
 </div></div>
 
-
-<section class="box" id="adminProductsSection" style="display:none">
-<h2 class="center">🆕 Latest Products</h2>
-<div id="adminProducts" class="grid"></div>
-</section>
-
 <div id="detail" class="detail">
 <div><button class="back" onclick="closeProduct()">← Back</button><div class="mainphoto" id="mainPhoto">🎨</div><div class="thumbs"><div class="thumb" onclick="setEmoji('🎨')">🎨</div><div class="thumb" onclick="setEmoji('✨')">✨</div><div class="thumb" onclick="setEmoji('🖼️')">🖼️</div></div></div>
 <div><h1 id="pname">3D Engraved Mobile Skin</h1><div class="price" id="pprice">₹149</div><p>Premium mobile back skin. Model-wise fitting available.</p>
@@ -98,6 +92,11 @@ footer{background:#111827;color:#fff;text-align:center;padding:25px;line-height:
 
 <div class="cart" id="cart"><h2>🛒 Cart</h2><div id="cartItems">Cart empty hai.</div><h3 id="total">Total: ₹0</h3><button class="wa" style="padding:13px 18px;border:0;border-radius:9px;font-weight:900" onclick="sendCart()">💬 WhatsApp Order</button><p>📦 Parcel charge अलग से लगेगा।</p></div>
 </div>
+
+<section id="adminProductsSection" class="wrap" style="display:none">
+  <h2 class="center">🆕 नए Products</h2>
+  <div id="adminProductsGrid" class="grid"></div>
+</section>
 <footer><b>Kuldeep Mobile</b><br>📍 Sadar Bazzar, Bilara - 342602<br>📞 9950159562<br><a class="wa" style="display:inline-block;margin-top:8px;padding:11px 16px;text-decoration:none;border-radius:9px" href="https://wa.me/919950159562">WhatsApp करें</a><br>📦 Parcel charge अलग से</footer>
 
 <script>
@@ -154,48 +153,41 @@ document.getElementById('detailSearch').addEventListener('input',e=>fillModels(e
 document.getElementById('allSearch').addEventListener('input',e=>fillModels(e.target.value,document.getElementById('allBrand').value));document.getElementById('allBrand').addEventListener('change',e=>fillModels(document.getElementById('allSearch').value,e.target.value));
 document.getElementById('siteSearch').addEventListener('input',e=>fillModels(e.target.value,'all'));fillModels();render();
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
 <script>
-(function(){
-  const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
-  const bucket=SUPABASE_BUCKET, table=SUPABASE_TABLE;
-  function publicUrl(path){return sb.storage.from(bucket).getPublicUrl(path).data.publicUrl}
-  function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-  function money(v){return v==null||v===''?'Price on request':'₹'+Number(v).toLocaleString('en-IN')}
-  function openDbProduct(p){
-    if(typeof window.openProduct==='function'){
-      window.openProduct(p.title,p.price||0,publicUrl(p.image_path));
-      const d=document.getElementById('detail');
-      if(d) d.scrollIntoView({behavior:'smooth'});
-      const o=document.getElementById('pname'); if(o)o.textContent=p.title;
-      const pr=document.getElementById('pprice'); if(pr)pr.textContent=money(p.price);
-      const main=document.getElementById('mainPhoto');
-      if(main) main.innerHTML='<img src="'+publicUrl(p.image_path)+'" alt="'+esc(p.title)+'" style="max-width:100%;max-height:100%;object-fit:contain">';
-      const desc=d?.querySelector('p'); if(desc)desc.textContent=(p.offer||'')+' Model-wise fitting available.';
-    }
-  }
-  async function load(){
-    try{
-      const {data,error}=await sb.from(table).select('id,title,brand,model,price,offer,image_path,created_at').order('created_at',{ascending:false}).limit(50);
-      if(error) throw error;
-      const products=(data||[]).filter(x=>x.title && x.title!=='__POSTER__' && x.image_path);
-      const posters=(data||[]).filter(x=>x.title==='__POSTER__' && x.image_path);
-      const sec=document.getElementById('adminProductsSection');
-      const box=document.getElementById('adminProducts');
-      if(products.length){
-        sec.style.display='block';
-        box.innerHTML=products.map(p=>`<div class="card" data-db-id="${p.id}"><div class="cardpic" style="padding:10px;background:#fff"><img src="${publicUrl(p.image_path)}" alt="${esc(p.title)}" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div><div class="cardinfo"><h3>${esc(p.title)}</h3><div class="muted">${esc([p.brand,p.model].filter(Boolean).join(' • '))}</div><div class="muted">${esc(p.offer||'')}</div><div class="price">${money(p.price)}</div><button style="margin-top:8px;width:100%;padding:10px;border:0;border-radius:8px;background:#111827;color:#fff" onclick='(${openDbProduct.toString()})(${JSON.stringify(p)})'>View / Order</button></div></div>`).join('');
-      }
-      if(posters.length){
-        const latest=posters[0];
-        const img=document.querySelector('.banner img');
-        if(img) img.src=publicUrl(latest.image_path);
-      }
-    }catch(e){console.warn('Supabase load:',e.message)}
-  }
-  load();
-})();
-</script>
+const KULDEEP_SUPABASE_URL='https://huousyafsqmfjazwjphz.supabase.co';
+const KULDEEP_SUPABASE_KEY='sb_publishable_dGH5vs_CIFYDmL1PezBoWw_hpcpJhm5';
+const KULDEEP_SUPABASE_BUCKET='Skin-photo';
+const KULDEEP_SUPABASE_TABLE='skin_photos';
 
+function kdPublicUrl(path){
+  return KULDEEP_SUPABASE_URL+'/storage/v1/object/public/'+KULDEEP_SUPABASE_BUCKET+'/'+String(path||'').split('/').map(encodeURIComponent).join('/');
+}
+function kdEsc(v){
+  return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+async function kdLoadProducts(){
+  try{
+    const url=KULDEEP_SUPABASE_URL+'/rest/v1/'+KULDEEP_SUPABASE_TABLE+'?select=id,title,brand,model,price,offer,image_path&order=created_at.desc';
+    const res=await fetch(url,{headers:{apikey:KULDEEP_SUPABASE_KEY,Authorization:'Bearer '+KULDEEP_SUPABASE_KEY}});
+    if(!res.ok) return;
+    const rows=await res.json();
+    if(!Array.isArray(rows)||!rows.length) return;
+    const grid=document.getElementById('adminProductsGrid');
+    grid.innerHTML=rows.map(x=>{
+      const img=kdPublicUrl(x.image_path);
+      const name=x.title||x.model||x.brand||'Product';
+      const price=(x.price!==null&&x.price!==undefined&&x.price!=='')?'₹'+x.price:'';
+      const sub=[x.brand,x.model].filter(Boolean).join(' • ');
+      const offer=x.offer?'<div class="muted">🎁 '+kdEsc(x.offer)+'</div>':'';
+      const jsName=String(name).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      const jsImg=String(img).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      return '<div class="card" onclick="openProduct(\''+jsName+'\','+(Number(x.price)||0)+',\''+jsImg+'\')">'
+        +'<div class="cardpic" style="padding:10px;background:#fff"><img src="'+kdEsc(img)+'" alt="'+kdEsc(name)+'" style="width:100%;height:100%;object-fit:contain;border-radius:8px"></div>'
+        +'<div class="cardinfo"><h3>'+kdEsc(name)+'</h3><div class="muted">'+kdEsc(sub)+'</div>'+offer+'<div class="price">'+price+'</div></div></div>';
+    }).join('');
+    document.getElementById('adminProductsSection').style.display='block';
+  }catch(e){console.log('Supabase product load error',e);}
+}
+window.addEventListener('load',kdLoadProducts);
+</script>
 </body></html>
